@@ -3,7 +3,9 @@ package example.services;
 import example.model.Comment;
 import example.proxies.CommentNotificationProxy;
 import example.repositories.CommentRepository;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CommentService {
 
     private final CommentRepository commentRepository;
