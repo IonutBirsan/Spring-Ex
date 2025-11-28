@@ -12,22 +12,27 @@ import java.util.logging.Logger;
 @Component
 public class LoggingAspect {
 
-    private Logger logger = Logger.getLogger(LoggingAspect.class.getName());
+    private Logger logger =
+            Logger.getLogger(LoggingAspect.class.getName());
 
     @Around("execution(* example.*.*(..))")
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
-        String methodName =
-        joinPoint.getSignature().getName();
+        String methodName = joinPoint.getSignature().getName();
         Object [] arguments = joinPoint.getArgs();
+
 
         logger.info("Method " + methodName +
                 " with parameters " + Arrays.asList(arguments) +
-                        " will execute");
+                " will execute");
 
-        Object returnedByMethod = joinPoint.proceed();
+        Comment comment = new Comment();
+        comment.setText("Some other text!");
+        Object [] newArguments = {comment};
+
+        Object returnedByMethod = joinPoint.proceed(newArguments);
 
         logger.info("Method executed and returned " + returnedByMethod);
 
-        return returnedByMethod;
+        return "FAILED";
     }
 }
