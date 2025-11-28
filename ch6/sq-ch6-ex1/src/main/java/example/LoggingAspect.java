@@ -15,7 +15,7 @@ public class LoggingAspect {
     private Logger logger =
             Logger.getLogger(LoggingAspect.class.getName());
 
-    @Around("execution(* example.*.*(..))")
+    @Around("@annotation(ToLog)")
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
         String methodName = joinPoint.getSignature().getName();
         Object [] arguments = joinPoint.getArgs();
