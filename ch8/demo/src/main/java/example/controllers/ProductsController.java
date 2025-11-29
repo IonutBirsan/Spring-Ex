@@ -25,8 +25,8 @@ public class ProductsController {
 
     @PostMapping("/products")
     public String addProduct(
-            @RequestParam String name,
-            @RequestParam double price,
+            String name,
+            double price,
             Model model
     ) {
         Product p = new Product();
